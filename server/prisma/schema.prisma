@@ -1,0 +1,66 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+// 1. Users Tablosu
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @db.VarChar(50)
+  email        String   @unique @db.VarChar(100)
+  passwordHash String   @map("password_hash") @db.VarChar(255) // JS'de passwordHash, DB'de password_hash
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // İlişkiler
+  notes        Note[]   // Bir kullanıcının birden çok notu olabilir
+
+  @@map("users") // Veritabanındaki tablo adı "users"
+}
+
+// 2. Notes Tablosu
+model Note {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @map("user_id") // Foreign Key
+  title      String   @db.VarChar(150)
+  content    String   @db.Text // SQL'deki TEXT tipi
+  isArchived Boolean  @default(false) @map("is_archived")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at") // Değişiklikte otomatik güncellenir
+
+  // İlişkiler
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags       NoteTag[] // Bir notun birden çok etiketi olabilir (Ara tablo üzerinden)
+
+  @@map("notes")
+}
+
+// 3. Tags Tablosu
+model Tag {
+  id    Int       @id @default(autoincrement())
+  name  String    @unique @db.VarChar(50)
+
+  // İlişkiler
+  notes NoteTag[] // Bir etiket birden çok notta olabilir
+
+  @@map("tags")
+}
+
+// 4. NoteTags (Ara Tablo - Many-to-Many)
+model NoteTag {
+  noteId Int @map("note_id")
+  tagId  Int @map("tag_id")
+
+  // İlişkiler
+  note   Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  // Composite Primary Key (İki alanın birleşimi benzersiz ID'dir)
+  @@id([noteId, tagId])
+  @@map("note_tags")
+}
