@@ -14,9 +14,14 @@ model User {
   id           Int      @id @default(autoincrement())
   username     String   @db.VarChar(50)
   email        String   @unique @db.VarChar(100)
-  passwordHash String   @map("password_hash") @db.VarChar(255) // JS'de passwordHash, DB'de password_hash
-  createdAt    DateTime @default(now()) @map("created_at")
+  passwordHash String?   @map("password_hash") @db.VarChar(255) // JS'de passwordHash
+  googleId     String?  @unique @map("google_id")
+  //şifre sıfırlama
+  passwordResetToken      String?  // Token'ın kendisi (opsiyonel)
+  passwordResetExpires  DateTime? // Token'ın geçerlilik süresi (opsiyonel)
 
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt
   // İlişkiler
   notes        Note[]   // Bir kullanıcının birden çok notu olabilir
 
