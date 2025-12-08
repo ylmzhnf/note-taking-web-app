@@ -139,28 +139,28 @@ export const passwordForget = async (req, res) => {
 };
 
 export const passwordReset = async (req, res) => {
-  const {email, token, newPassword, } = req.body;
+  const { email, token, newPassword, } = req.body;
   try {
     const checkEmail = await prisma.user.findUnique({
-      where: {email}
+      where: { email }
     })
     if (!checkEmail) {
-      return res.status(400).json({error: "Invalid email or token."});
+      return res.status(400).json({ error: "Invalid email or token." });
     }
 
-    if(checkEmail.passwordResetExpires < new Date()) {
-      return res.status(400).json({error: "Token has expired."});
+    if (checkEmail.passwordResetExpires < new Date()) {
+      return res.status(400).json({ error: "Token has expired." });
     }
     const isTokenValid = await bcrypt.compare(token, checkEmail.passwordResetToken);
-    if(!isTokenValid){
+    if (!isTokenValid) {
       return res.status(400).json({
-        error:"Invalid email or token."
+        error: "Invalid email or token."
       })
     }
-    const hashedNewPassword =  await bcrypt.hash(newPassword, saltRounds);
-    const updatePassword= await prisma.user.update({
-      where:{email},
-      data:{
+    const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+    const updatePassword = await prisma.user.update({
+      where: { email },
+      data: {
         passwordHash: hashedNewPassword,
         passwordResetToken: null,
         passwordResetExpires: null,
@@ -170,43 +170,59 @@ export const passwordReset = async (req, res) => {
     res.status(200).json({
       message: "Password has been reset successfully."
     })
-    
+
 
   } catch (error) {
     console.error("Error during password rest: ", error);
-    res.status(500).json( {
+    res.status(500).json({
       error: "Internal server error",
       details: error.message
     })
-    
+
   }
 }
 
-export const googleAuth= async (req, res)=> {
-  const {email, name, sub: googleId} = req.body;
+export const googleAuth = async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ error: "Google ID token is required." });
+  }
+
   try {
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+
+    const { email, name, sub: googleId } = payload;
+
     const user = await prisma.user.upsert({
-      where:{email},
-      update:{
+      where: { email },
+      update: {
         googleId
       },
-      create:{
+      create: {
         email,
         username: name,
         googleId
-    }});
-    const token = jwt.sign(
+      }
+    });
+    const jwtToken = jwt.sign(
       { id: user.id, email: user.email },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
     res.json({
       message: "Login successful",
-      token: token,
+      token: jwtToken,
       userId: user.id,
       username: user.username,
     });
   } catch (error) {
-    
+    console.error("Error during Google authentication: ", error);
+    res.status(500).json({ error: "Internal server error", details: error.message });
   }
 }
