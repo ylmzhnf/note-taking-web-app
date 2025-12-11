@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -11,8 +12,21 @@ function Register() {
   const [err, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const { register } = useContext(AuthContext);
+  const { register, google } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const googleSuccess = async (response) => {
+    try {
+      await google(response.credential);
+      navigate("/");
+    } catch (error) {
+      setError("Google login failed. Please try again.");
+    }
+  };
+
+  const googleFailure = () => {
+    setError("Google login was interrupted or failed. Please try again.");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,10 +102,14 @@ function Register() {
         <button type="submit">Sign Up</button>
       </form>
 
-      <form onSubmit={handleSubmit}>
+      <div className="google-auth-container">
         <p>Or log in with:</p>
-        <button type="submit">Google</button>
-      </form>
+        <GoogleLogin
+          onSuccess={googleSuccess}
+          onError={googleFailure}
+          useOneTap
+        />
+      </div>
 
       <p>
         Already have an account? <Link to="/login">Login</Link>

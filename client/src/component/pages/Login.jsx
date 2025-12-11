@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 
@@ -83,7 +83,7 @@ function Login() {
             Login
           </button>
         </form>
-        <div className="google-auth-container" onSubmit={handleSubmit}>
+        <div className="google-auth-container">
           <p>Or log in with:</p>
           <GoogleLogin
             onSuccess={googleSuccess}
