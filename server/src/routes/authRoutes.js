@@ -6,7 +6,7 @@ const router = express.Router();
 // Auth Routes
 router.post("/register", register);
 router.post("/login", login);
-router.post("/password-forget", passwordForget);
+router.post("/password-forgot", passwordForget);
 router.post("/password-reset", passwordReset);
 router.post("/google", googleAuth);
 

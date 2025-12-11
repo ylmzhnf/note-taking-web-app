@@ -1,10 +1,10 @@
 import express from "express";
-import { updatePassword, updateTheme } from "../controllers/settingsController";
+import { updatePassword, updateTheme } from "../controllers/settingsController.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 
-const router= express.Router();
+const router = express.Router();
 
-router.patch("/password",verifyToken ,updatePassword);
+router.patch("/password", verifyToken, updatePassword);
 router.patch("/theme", verifyToken, updateTheme);
 
 export default router;
