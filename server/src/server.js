@@ -1,13 +1,8 @@
+import "./config/init.js"; // MUST be the first import to load env vars
 import app from "./app.js";
 import { prisma } from "../src/lib/prisma.js";
-import env from "dotenv";
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-env.config({ path: join(__dirname, "../.env") });
+// Removed manual dotenv config as it's now handled in init.js
 
 const PORT = process.env.PORT || 3000;
 

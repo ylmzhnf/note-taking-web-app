@@ -1,0 +1,157 @@
+.navbar-container {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    width: 260px;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.navbar-logo {
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-sm);
+}
+
+.main-nav-desktop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xl);
+}
+
+.nav-item-desktop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Space between content and chevron */
+    padding: 10px var(--spacing-md);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.nav-item-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.nav-item-desktop:hover {
+    background-color: var(--bg-hover);
+}
+
+.nav-item-desktop.active {
+    background-color: var(--bg-hover);
+    /* Light gray/blue active state */
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.nav-item-desktop .active-chevron {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+}
+
+/* Remove old accent dot */
+.nav-item-desktop .active-accent {
+    display: none;
+}
+
+.nav-item-desktop img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.tags-section {
+    flex-grow: 1;
+}
+
+.tags-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+}
+
+.settings-sidebar-btn {
+    margin-top: auto;
+}
+
+/* Mobile Bottom Nav - Icon-only Design matching Image 1-4 */
+.mobile-bottom-nav {
+    display: none;
+}
+
+.mobile-only-label {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        flex-direction: row;
+        padding: 0;
+        border-top: 1px solid var(--border);
+        z-index: 1000;
+        background-color: var(--bg-sidebar);
+    }
+
+    .navbar-logo,
+    .main-nav-desktop,
+    .tags-section,
+    .settings-sidebar-btn {
+        display: none;
+    }
+
+    .mobile-bottom-nav {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 16px;
+    }
+
+    .nav-item-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        /* Fixed width for better icon centering */
+        height: 44px;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        background-color: transparent;
+    }
+
+    .nav-item-mobile img {
+        width: 24px;
+        height: 24px;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+    }
+
+    /* Specific blue-tinted rounded active background matching images */
+    .nav-item-mobile.active {
+        background-color: var(--bg-nav-active);
+        /* Very light blue background or theme equivalent */
+    }
+
+    .nav-item-mobile.active img {
+        opacity: 1;
+        filter: invert(41%) sepia(87%) rotate(216deg) brightness(97%) contrast(105%);
+        /* Blue filter for icon */
+    }
+}

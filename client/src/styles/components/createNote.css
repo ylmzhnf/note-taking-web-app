@@ -1,0 +1,123 @@
+.create-note-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-main);
+}
+
+.create-note-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: var(--spacing-xl);
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    gap: var(--spacing-xl);
+}
+
+.create-note-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.create-title-input {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    padding: 0;
+}
+
+.create-title-input::placeholder {
+    color: var(--text-main);
+    opacity: 1;
+    /* Make placeholder explicit like 'Enter a title...' */
+}
+
+/* Metadata Section matching NoteEditor.css */
+.create-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.meta-label {
+    width: 140px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.meta-label img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+}
+
+.create-tags-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    outline: none;
+    min-width: 200px;
+}
+
+.create-tags-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.meta-value.disabled {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+/* Editor Wrapper */
+.create-editor-wrapper {
+    flex-grow: 1;
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid var(--border);
+}
+
+.ProseMirror {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #4B5563;
+    outline: none;
+    min-height: 200px;
+}
+
+/* Bottom Actions */
+.create-bottom-actions {
+    padding-top: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-md);
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    .create-title-input::placeholder {
+        color: var(--text-main);
+    }
+
+    .ProseMirror {
+        color: var(--text-secondary);
+    }
+}

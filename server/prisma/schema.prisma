@@ -7,6 +7,7 @@ generator client {
 datasource db {
   provider = "postgresql"
 
+
 }
 
 // 1. Users Tablosu
@@ -17,14 +18,14 @@ model User {
   passwordHash String?   @map("password_hash") @db.VarChar(255) // JS'de passwordHash
   googleId     String?  @unique @map("google_id")
   //şifre sıfırlama
-  passwordResetToken      String?  // Token'ın kendisi (opsiyonel)
-  passwordResetExpires  DateTime? // Token'ın geçerlilik süresi (opsiyonel)
+  passwordResetToken      String? @map("password_reset_token") // Token'ın kendisi (opsiyonel)
+  passwordResetExpires  DateTime? @map("password_reset_expires")// Token'ın geçerlilik süresi (opsiyonel)
 
-  appTheme              String    @default("light") @map("app_theme")
+  appTheme              String    @default("system") @map("app_theme")
   appFont               String    @default("sans-serif") @map("app_font")
   
   createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime  @updatedAt
+  updatedAt        DateTime  @updatedAt @map("updated_at")
   // İlişkiler
   notes        Note[]   // Bir kullanıcının birden çok notu olabilir
 
@@ -36,7 +37,7 @@ model Note {
   id         Int      @id @default(autoincrement())
   userId     Int      @map("user_id") // Foreign Key
   title      String   @db.VarChar(150)
-  content    String   @db.Text // SQL'deki TEXT tipi
+  content    String   @db.Text // TipTap HTML/JSON verisi burada tutulacak
   isArchived Boolean  @default(false) @map("is_archived")
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @default(now()) @updatedAt @map("updated_at") // Değişiklikte otomatik güncellenir

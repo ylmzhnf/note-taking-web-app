@@ -226,3 +226,18 @@ export const googleAuth = async (req, res) => {
     res.status(500).json({ error: "Internal server error", details: error.message });
   }
 }
+
+export const getMe = async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id }
+    });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Don't send password hash
+    const { passwordHash, ...userProfile } = user;
+    res.json(userProfile);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};

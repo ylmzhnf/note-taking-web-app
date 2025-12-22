@@ -1,0 +1,445 @@
+/* Page Wrapper - Split Layout on Desktop */
+.settings-page-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-main);
+    overflow: hidden;
+}
+
+/* Sidebar Styling */
+.settings-sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xl) var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.settings-header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-xs);
+}
+
+.settings-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.settings-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+.settings-nav-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.settings-nav-item.active {
+    background-color: #F3F5F8;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.settings-nav-item.active .active-chevron {
+    opacity: 1;
+}
+
+.settings-nav-item .item-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.settings-nav-item img {
+    width: 20px;
+    height: 20px;
+}
+
+.settings-nav-item .active-chevron {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+}
+
+.settings-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: var(--spacing-md) 0;
+}
+
+.settings-nav-item.logout {
+    color: #EF4444;
+}
+
+.settings-nav-item.logout:hover {
+    background-color: #FEF2F2;
+}
+
+/* Content Panel Styling */
+.settings-content-panel {
+    flex-grow: 1;
+    padding: var(--spacing-2xl);
+    overflow-y: auto;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    /* Constrain reading width inside panel */
+}
+
+/* Reuse existing card and form styles but ensure they fit nicely */
+.sub-view-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.sub-view-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.selection-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+}
+
+.selection-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-card);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.selection-card.active {
+    background-color: var(--bg-active);
+    border-color: var(--primary);
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.card-icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-panel);
+}
+
+.card-icon-circle img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+}
+
+.font-aa {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text-main);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.card-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.radio-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #D1D5DB;
+    position: relative;
+}
+
+.radio-dot.selected {
+    border-color: #335CFF;
+}
+
+.radio-dot.selected::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #335CFF;
+    border-radius: 50%;
+}
+
+.apply-btn {
+    align-self: flex-end;
+    background-color: #335CFF;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: background-color 0.2s;
+}
+
+.apply-btn:hover {
+    background-color: #2546BD;
+}
+
+/* Password Form */
+.password-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 12px 16px;
+    padding-right: 48px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    transition: border-color 0.2s;
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.input-with-icon button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+    opacity: 0.4;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.input-with-icon button:hover {
+    opacity: 0.7;
+}
+
+.input-with-icon button img {
+    width: 20px;
+    height: 20px;
+}
+
+.field-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.field-hint img {
+    width: 14px;
+    height: 14px;
+}
+
+.save-password-btn {
+    align-self: flex-end;
+    background-color: #335CFF;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: background-color 0.2s;
+}
+
+.save-password-btn:hover {
+    background-color: #2546BD;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.alert.success {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.alert.error {
+    background-color: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+}
+
+.settings-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.settings-breadcrumb:hover {
+    color: var(--text-main);
+}
+
+.settings-breadcrumb img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Mobile Visibility Handling */
+.mobile-only {
+    display: none;
+}
+
+.mobile-arrow {
+    display: none;
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+    .settings-page-wrapper {
+        flex-direction: column;
+    }
+
+    .settings-sidebar {
+        width: 100%;
+        height: 100%;
+        border-right: none;
+        padding: var(--spacing-md);
+    }
+
+    .settings-sidebar.hidden-mobile {
+        display: none;
+    }
+
+    .settings-content-panel {
+        padding: var(--spacing-md);
+        width: 100%;
+    }
+
+    .settings-content-panel.hidden-mobile {
+        display: none;
+    }
+
+    .settings-nav-item {
+        padding: 16px 4px;
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+    }
+
+    .settings-nav-item:hover,
+    .settings-nav-item.active {
+        background-color: transparent;
+        color: var(--text-main);
+    }
+
+    .active-chevron {
+        display: none;
+        /* Hide desktop active chevron on mobile */
+    }
+
+    .mobile-arrow {
+        display: block;
+        /* Show navigation arrow on mobile list */
+        opacity: 0.4;
+    }
+
+    .mobile-only {
+        display: block;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .settings-header-title {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .settings-divider {
+        display: none;
+    }
+
+    /* Adjust cards for mobile */
+    .selection-cards,
+    .password-form {
+        max-width: 100%;
+    }
+}

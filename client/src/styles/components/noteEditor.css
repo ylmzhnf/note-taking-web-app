@@ -1,0 +1,230 @@
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-main);
+}
+
+.editor-layout-main {
+    display: flex;
+    flex-grow: 1;
+    padding: var(--spacing-xl);
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    gap: var(--spacing-xl);
+}
+
+.editor-content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.editor-title-view {
+    font-size: 2rem;
+    color: var(--text-main);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.editor-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.meta-label {
+    width: 140px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.meta-label img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+}
+
+.meta-value {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.tiptap-wrapper {
+    flex-grow: 1;
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid var(--border);
+}
+
+.ProseMirror {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #4B5563;
+    outline: none;
+    min-height: 300px;
+}
+
+/* Bottom Actions Desktop */
+.editor-bottom-actions {
+    padding-top: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-md);
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.secondary-btn {
+    background-color: #F3F5F8;
+    color: var(--text-secondary);
+    padding: 10px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.secondary-btn:hover {
+    background-color: #E5E7EB;
+}
+
+/* Right Column Actions */
+.editor-right-column {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.action-card {
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 4px;
+}
+
+.side-action-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 12px;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.side-action-btn:hover {
+    background-color: #F9FAFB;
+}
+
+.side-action-btn img {
+    opacity: 0.6;
+}
+
+/* Mobile Header */
+.mobile-editor-header {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-editor-header {
+        display: flex;
+        padding: var(--spacing-md);
+        background-color: white;
+        border-bottom: 1px solid var(--border);
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+
+    .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .mobile-header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+
+    .icon-action img {
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
+    }
+
+    .mobile-cancel-btn {
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.9375rem;
+    }
+
+    .mobile-save-btn {
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.9375rem;
+    }
+
+    .editor-layout-main {
+        flex-direction: column;
+        padding: var(--spacing-md);
+        max-width: 100%;
+    }
+
+    .editor-right-column,
+    .editor-bottom-actions {
+        display: none;
+    }
+
+    .editor-title-view {
+        font-size: 1.75rem;
+        margin-top: var(--spacing-md);
+        font-weight: 800;
+    }
+
+    .editor-meta {
+        margin-bottom: var(--spacing-xl);
+        padding: var(--spacing-md) 0;
+    }
+
+    .tiptap-wrapper {
+        border-top: none;
+        padding-top: 0;
+    }
+}

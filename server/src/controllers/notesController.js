@@ -42,7 +42,7 @@ export const getArchivedNotes = async (req, res) => {
 };
 
 export const archiveNote = async (req, res) => {
-  const noteId = req.params.id;
+  const noteId = parseInt(req.params.id);
   const userId = req.user.id;
 
   try {
@@ -220,7 +220,7 @@ export const createNote = async (req, res) => {
 };
 
 export const getNoteById = async (req, res) => {
-  const noteId = req.params.id;
+  const noteId = parseInt(req.params.id);
   const userId = req.user.id;
   try {
     const note = await prisma.note.findUnique({
@@ -246,7 +246,7 @@ export const getNoteById = async (req, res) => {
 };
 
 export const updateNote = async (req, res) => {
-  const noteId = req.params.id;
+  const noteId = parseInt(req.params.id);
   const userId = req.user.id;
   const { title, content } = req.body;
 
@@ -267,6 +267,54 @@ export const updateNote = async (req, res) => {
     res.status(200).json({ message: "Note updated successfully" });
   } catch (error) {
     console.error("Error updating note: ", error);
+    res.status(500).json({
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
+
+export const deleteNote = async (req, res) => {
+  const noteId = parseInt(req.params.id);
+  const userId = req.user.id;
+  try {
+    const deleteNote = await prisma.note.deleteMany({
+      where: {
+        id: noteId,
+        userId: userId,
+      },
+    });
+    if (deleteNote.count === 0) {
+      res.status(404).json({ error: "Note not found or unauthorized" });
+    }
+    res.status(200).json({ message: "Note deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting note: ", error);
+    res.status(500).json({
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
+
+export const getTags = async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const tags = await prisma.tag.findMany({
+      where: {
+        notes: {
+          some: {
+            note: {
+              userId: userId
+            }
+          }
+        }
+      },
+      orderBy: { name: "asc" }
+    });
+    res.status(200).json(tags);
+  } catch (error) {
+    console.error("Error fetching tags: ", error);
     res.status(500).json({
       error: "Internal server error",
       details: error.message,
