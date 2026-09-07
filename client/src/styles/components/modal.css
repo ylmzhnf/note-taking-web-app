@@ -1,0 +1,191 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.2s ease-out;
+    padding: 16px;
+    /* Ensure some spacing on very small screens */
+}
+
+/* Modal Container */
+.modal-container {
+    background-color: var(--bg-panel);
+    width: 100%;
+    max-width: 440px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    border: 1px solid var(--border);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header & Icon */
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.modal-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+}
+
+.modal-icon-wrapper img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+}
+
+/* Content */
+.modal-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.modal-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Actions */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border);
+    margin-top: var(--spacing-sm);
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    /* Prevent button text wrapping */
+}
+
+.modal-btn-cancel {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    border: 1px solid transparent;
+}
+
+.modal-btn-cancel:hover {
+    background-color: var(--bg-active);
+}
+
+.modal-btn-action {
+    color: white;
+    border: 1px solid transparent;
+}
+
+/* Specific Action Colors */
+.modal-btn-action.destructive {
+    background-color: #EF4444;
+    /* Red */
+    box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2);
+}
+
+.modal-btn-action.destructive:hover {
+    background-color: #DC2626;
+}
+
+.modal-btn-action.primary {
+    background-color: #335CFF;
+    /* Blue */
+    box-shadow: 0 1px 2px rgba(51, 92, 255, 0.2);
+}
+
+.modal-btn-action.primary:hover {
+    background-color: #2546BD;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+    .modal-container {
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+        width: 100%;
+        margin: 0 16px;
+        /* Add margin on mobile */
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+        /* Stack buttons on mobile */
+        gap: 8px;
+        /* Reduce gap */
+    }
+
+    .modal-btn {
+        width: 100%;
+        /* Full width buttons */
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+    }
+}
+
+/* Dark Mode Overrides (if needed, but vars handle most) */
+@media (prefers-color-scheme: dark) {
+    .modal-overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
