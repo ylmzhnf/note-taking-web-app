@@ -184,7 +184,7 @@ export const getNotesByTag = async (req, res) => {
       error: "Internal server error",
     });
   }
-};
+}};
 
 export const createNote = async (req, res) => {
   const userId = req.user.id;
