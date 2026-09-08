@@ -149,9 +149,10 @@ export const searchNotes = async (req, res) => {
 };
 export const getNotesByTag = async (req, res) => {
   const userId = req.user.id;
-  const tagId = parseInt(req.params.tagId);
-  if (isNaN(tagId)) {
+  const tagId = Number.parseInt(req.params.tagId, 10);
+  if (Number.isNaN(tagId)) {
     return res.status(400).json({ error: "Invalid Tag ID format" });
+  }
 
   try {
     const notes = await prisma.note.findMany({
@@ -184,7 +185,8 @@ export const getNotesByTag = async (req, res) => {
       error: "Internal server error",
     });
   }
-}};
+  }
+};
 
 export const createNote = async (req, res) => {
   const userId = req.user.id;

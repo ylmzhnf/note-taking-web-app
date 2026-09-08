@@ -161,3 +161,14 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+[data-theme="dark"] .dashboard img,
+[data-theme="dark"] .settings-page-wrapper img,
+[data-theme="dark"] .tags-list-page img {
+  filter: invert(1) brightness(1.15);
+}
+
+[data-theme="dark"] .dashboard .navbar-logo img,
+[data-theme="dark"] .dashboard .mobile-logo {
+  filter: none;
+}
