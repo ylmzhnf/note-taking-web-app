@@ -51,7 +51,7 @@
   gap: var(--spacing-md);
   padding: var(--spacing-lg) 0;
   width: 100%;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border);
   background: transparent;
   color: var(--text-main);
   font-weight: 500;

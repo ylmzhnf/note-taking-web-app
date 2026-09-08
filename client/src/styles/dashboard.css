@@ -110,7 +110,7 @@
 .create-note-btn-full {
   width: 100%;
   background-color: var(--primary);
-  color: white;
+  color: var(--text-on-primary);
   padding: 12px;
   border-radius: var(--radius-md);
   font-weight: 600;
@@ -277,7 +277,7 @@
     right: 24px;
     width: 60px;
     height: 60px;
-    background-color: #335cff;
+    background-color: var(--primary);
     /* Bright blue - Image 1 */
     border-radius: 50%;
     align-items: center;

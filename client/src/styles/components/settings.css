@@ -208,7 +208,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--border);
   position: relative;
 }
 
@@ -231,7 +231,7 @@
 .apply-btn {
   align-self: flex-end;
   background-color: var(--primary);
-  color: white;
+  color: var(--text-on-primary);
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -323,7 +323,7 @@
 .save-password-btn {
   align-self: flex-end;
   background-color: var(--primary);
-  color: white;
+  color: var(--text-on-primary);
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
