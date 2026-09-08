@@ -5,7 +5,7 @@ A full-stack note-taking application based on the [Frontend Mentor note-taking w
 ## Live Demo
 
 - Frontend: [note-taking-web-app-five.vercel.app](https://note-taking-web-app-five.vercel.app)
-- API health check: [note-taking-web-app-production-9c85.up.railway.app/health](https://note-taking-web-app-production-9c85.up.railway.app/health)
+
 
 The frontend is deployed on Vercel and the API is deployed on Railway. The demo requires the production environment variables described below. Google sign-in additionally requires the deployed frontend origin to be configured in Google Cloud Console.
 
