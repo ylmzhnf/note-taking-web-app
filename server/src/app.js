@@ -11,6 +11,8 @@ const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
+const vercelPreviewOrigin =
+  /^https:\/\/note-taking-web-[a-z0-9-]+-ylmzhnfs-projects\.vercel\.app$/;
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -25,11 +27,15 @@ const authLimiter = rateLimit({
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        vercelPreviewOrigin.test(origin)
+      ) {
         return callback(null, true);
       }
 
-      return callback(new Error("Origin is not allowed by CORS"));
+      return callback(null, false);
     },
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

@@ -116,7 +116,6 @@ function Login({ googleEnabled }) {
               <GoogleLogin
                 onSuccess={googleSuccess}
                 onError={googleFailure}
-                useOneTap
                 width="320"
               />
             </div>
