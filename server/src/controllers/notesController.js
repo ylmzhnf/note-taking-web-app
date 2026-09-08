@@ -15,7 +15,7 @@ export const getNotes = async (req, res) => {
         },
       },
     });
-      return res.status(200).json(notes);
+    return res.status(200).json(notes);
   } catch (error) {
     console.error("Error fetching notes: ", error);
     res.status(500).json({
@@ -185,7 +185,6 @@ export const getNotesByTag = async (req, res) => {
       error: "Internal server error",
     });
   }
-  }
 };
 
 export const createNote = async (req, res) => {
@@ -198,11 +197,16 @@ export const createNote = async (req, res) => {
   if (typeof content !== "string") {
     return res.status(400).json({ error: "Note content must be text." });
   }
-  if (!Array.isArray(tagNames) || tagNames.some((tag) => typeof tag !== "string")) {
+  if (
+    !Array.isArray(tagNames) ||
+    tagNames.some((tag) => typeof tag !== "string")
+  ) {
     return res.status(400).json({ error: "tagNames must be an array." });
   }
 
-  const normalizedTagNames = [...new Set(tagNames.map((tag) => tag.trim()).filter(Boolean))];
+  const normalizedTagNames = [
+    ...new Set(tagNames.map((tag) => tag.trim()).filter(Boolean)),
+  ];
   if (normalizedTagNames.some((tag) => tag.length > 50)) {
     return res.status(400).json({ error: "Tags cannot exceed 50 characters." });
   }
@@ -212,7 +216,9 @@ export const createNote = async (req, res) => {
       where: { name: { in: normalizedTagNames } },
     });
     const existingTagNames = existingTags.map((tag) => tag.name);
-    const newTagNames = normalizedTagNames.filter(name => !existingTagNames.includes(name));
+    const newTagNames = normalizedTagNames.filter(
+      (name) => !existingTagNames.includes(name),
+    );
 
     // ⚛️ 2. PRISMA İŞLEMLERİ (TRANSACTION): Oluşturma ve Bağlama
     const result = await prisma.$transaction(async (tx) => {
@@ -364,12 +370,12 @@ export const getTags = async (req, res) => {
         notes: {
           some: {
             note: {
-              userId: userId
-            }
-          }
-        }
+              userId: userId,
+            },
+          },
+        },
       },
-      orderBy: { name: "asc" }
+      orderBy: { name: "asc" },
     });
     res.status(200).json(tags);
   } catch (error) {
