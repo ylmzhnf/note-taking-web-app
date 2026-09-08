@@ -47,7 +47,9 @@ function Register({ googleEnabled }) {
         error.response?.data?.message ||
         "An error occurred during registration.";
       setError(
-        typeof msg === "string" ? msg : "An error occurred during registration."
+        typeof msg === "string"
+          ? msg
+          : "An error occurred during registration.",
       );
     }
   };
@@ -69,12 +71,21 @@ function Register({ googleEnabled }) {
 
         <div className="auth-header">
           <h1>Create Your Account</h1>
-          <p>Sign up to start organizing your notes and boost your productivity.</p>
+          <p>
+            Sign up to start organizing your notes and boost your productivity.
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           {err && <div className="error-message">{err}</div>}
-          {success && <div className="success-message" style={{ color: 'green', fontSize: '0.875rem' }}>{success}</div>}
+          {success && (
+            <div
+              className="success-message"
+              style={{ color: "green", fontSize: "0.875rem" }}
+            >
+              {success}
+            </div>
+          )}
 
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -118,7 +129,7 @@ function Register({ googleEnabled }) {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 <img
-                  src={`/assets/images/icon-${showPassword ? 'hide' : 'show'}-password.svg`}
+                  src={`/assets/images/icon-${showPassword ? "hide" : "show"}-password.svg`}
                   alt="toggle password visibility"
                 />
               </button>
@@ -129,7 +140,9 @@ function Register({ googleEnabled }) {
             </div>
           </div>
 
-          <button type="submit" className="auth-btn">Sign Up</button>
+          <button type="submit" className="auth-btn">
+            Sign Up
+          </button>
         </form>
 
         {googleEnabled && (
@@ -140,7 +153,7 @@ function Register({ googleEnabled }) {
                 onSuccess={googleSuccess}
                 onError={googleFailure}
                 useOneTap
-                width="100%"
+                width="320"
               />
             </div>
           </>

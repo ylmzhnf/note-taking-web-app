@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import "../../styles/auth.css";
 
 function Login({ googleEnabled }) {
@@ -22,11 +22,11 @@ function Login({ googleEnabled }) {
     } catch (error) {
       setError("Google login failed. Please try again.");
     }
-  }
+  };
 
   const googleFailure = () => {
-    setError("Google login was interrupted or failed. Please try again.")
-  }
+    setError("Google login was interrupted or failed. Please try again.");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,9 +35,9 @@ function Login({ googleEnabled }) {
       await login(formData.email, formData.password);
       navigate("/");
     } catch (error) {
-      setError("Login failed. Please check your credentials.")
+      setError("Login failed. Please check your credentials.");
     }
-  }
+  };
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -78,7 +78,9 @@ function Login({ googleEnabled }) {
           <div className="form-group">
             <div className="label-row">
               <label htmlFor="password">Password</label>
-              <Link to="/password-forgot" className="forgot-link">Forgot</Link>
+              <Link to="/password-forgot" className="forgot-link">
+                Forgot
+              </Link>
             </div>
             <div className="input-container">
               <input
@@ -95,7 +97,7 @@ function Login({ googleEnabled }) {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 <img
-                  src={`/assets/images/icon-${showPassword ? 'hide' : 'show'}-password.svg`}
+                  src={`/assets/images/icon-${showPassword ? "hide" : "show"}-password.svg`}
                   alt="toggle password visibility"
                 />
               </button>
@@ -115,7 +117,7 @@ function Login({ googleEnabled }) {
                 onSuccess={googleSuccess}
                 onError={googleFailure}
                 useOneTap
-                width="100%"
+                width="320"
               />
             </div>
           </>
