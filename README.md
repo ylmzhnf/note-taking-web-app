@@ -2,6 +2,13 @@
 
 A full-stack note-taking application based on the [Frontend Mentor note-taking web app challenge](https://www.frontendmentor.io/challenges/note-taking-web-app-773r7bUfOG).
 
+## Live Demo
+
+- Frontend: [note-taking-web-app-five.vercel.app](https://note-taking-web-app-five.vercel.app)
+- API health check: [note-taking-web-app-production-9c85.up.railway.app/health](https://note-taking-web-app-production-9c85.up.railway.app/health)
+
+The frontend is deployed on Vercel and the API is deployed on Railway. The demo requires the production environment variables described below. Google sign-in additionally requires the deployed frontend origin to be configured in Google Cloud Console.
+
 ## Features
 
 - Create, edit, delete, and archive notes
@@ -68,6 +75,15 @@ note-taking-web-app/
 - PostgreSQL database
 - npm
 
+## Project Status
+
+- Frontend production build: working
+- Backend production server: working
+- PostgreSQL connection and Prisma migrations: configured
+- Email authentication and note management: implemented
+- Google sign-in: implemented; Google OAuth origins must be configured for each domain used
+- Responsive layouts and light/dark/system themes: implemented
+
 ## Installation
 
 ```bash
@@ -110,6 +126,20 @@ For `client/.env`:
 VITE_API_URL=http://localhost:3000
 VITE_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 ```
+
+For the deployed frontend, set `VITE_API_URL` to:
+
+```env
+VITE_API_URL=https://note-taking-web-app-production-9c85.up.railway.app
+```
+
+For the deployed backend, set `CLIENT_URL` to the production frontend origin without a route path:
+
+```env
+CLIENT_URL=https://note-taking-web-app-five.vercel.app
+```
+
+The backend also accepts project-owned Vercel preview origins. Do not add `/login` or another route to `CLIENT_URL`; the origin is only the scheme and domain.
 
 Do not commit `.env` files or store real secrets in the source code or repository.
 
@@ -166,7 +196,7 @@ npm run build
 2. Use `npm run build` as the build command.
 3. Use `npm start` as the start command.
 4. Add the variables from [`server/.env.example`](./server/.env.example).
-5. Use `/health` as the health check path.
+5. Use `/health` as the health check path. A healthy deployment returns `{"status":"ok"}`.
 
 ### Vercel
 
@@ -174,9 +204,16 @@ npm run build
 2. Use `npm run build` as the build command.
 3. Set the output directory to `dist`.
 4. Set `VITE_API_URL` to the public backend URL.
-5. Set the backend `CLIENT_URL` to the deployed Vercel URL.
+5. Set the backend `CLIENT_URL` to the deployed Vercel origin.
 
-For Google sign-in, add the Vercel domain to the Authorized JavaScript origins list in Google Cloud Console. Add `http://localhost:5173` as well for local development.
+For Google sign-in, add these origins to the Authorized JavaScript origins list for the same Google OAuth client:
+
+```text
+https://note-taking-web-app-five.vercel.app
+http://localhost:5173
+```
+
+Add the current Vercel preview origin as well when testing a preview deployment. Origins must not include `/login`, `/register`, or any other path.
 
 ## Security Notes
 
